@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import clientListService from "../../services/cliente/clientList.service";
 
-const clientListController = (req: Request, res: Response) => {
+const clientListController = async (req: Request, res: Response) => {
   try {
-    const users = clientListService();
+    const clients = await clientListService();
 
-    return res.send(users);
+    return res.send(clients);
   } catch (err) {
     if (err instanceof Error) {
       return res.status(400).send({
