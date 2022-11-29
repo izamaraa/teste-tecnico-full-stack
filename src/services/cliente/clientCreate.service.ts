@@ -3,6 +3,8 @@ import { Client } from "../../entities/client.entity";
 import { IClientCreate } from "../../interfaces/cliente";
 
 import { AppDataSource } from "../../data-source";
+import bcrypt from "bcrypt";
+import { AppError } from "../../errors/appError";
 
 const clientCreateService = async ({
   name,
@@ -15,14 +17,14 @@ const clientCreateService = async ({
   const emailAlreadyExists = clients.find((user) => user.email === email);
 
   if (emailAlreadyExists) {
-    throw new Error("Email already exists");
+    throw new AppError(409, "Email already exists");
   }
 
   const client = new Client();
   client.name = name;
   client.email = email;
   client.tel = tel;
-  client.password = password;
+  client.password = bcrypt.hashSync(password, 10);
 
   clientRepository.create(client);
   await clientRepository.save(client);

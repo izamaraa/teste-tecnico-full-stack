@@ -13,7 +13,7 @@ export interface IClientCreate {
   password: string;
 }
 
-// export interface IClientLogin {
-//   email: string;
-//   password: string;
-// }
+export interface IClientLogin {
+  email: string;
+  password: string;
+}
