@@ -5,17 +5,19 @@ import { AppError } from "../errors/appError";
 export const authClient = (req: Request, res: Response, next: NextFunction) => {
   let token = req.headers.authorization;
   if (!token) {
-    throw new AppError(401, "burro");
+    throw new AppError(401, "Token not found");
   }
   token = token.split(" ")[1];
   jwt.verify(
     token as string,
     process.env.JWT_SECRET as string,
     (err: any, decoded: any) => {
-      if (req.params.id === decoded.sub) {
+      req.clientId = decoded.sub;
+      // console.log(decoded.sub);
+      if (req.clientId === decoded.sub) {
         next();
       } else {
-        throw new AppError(403, "nojao");
+        throw new AppError(403, "forbbiden");
       }
     }
   );

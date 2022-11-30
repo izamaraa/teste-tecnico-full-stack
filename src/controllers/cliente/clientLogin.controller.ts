@@ -1,8 +1,12 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { AppError, handleError } from "../../errors/appError";
 import clientLoginService from "../../services/cliente/clientLogin.service";
-
-const clientLoginController = async (req: Request, res: Response) => {
+import jwt from "jsonwebtoken";
+const clientLoginController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { email, password } = req.body;
 
