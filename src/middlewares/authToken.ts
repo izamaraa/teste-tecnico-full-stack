@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { AppError } from "../errors/appError";
 
-export const authClient = (req: Request, res: Response, next: NextFunction) => {
+export const authToken = (req: Request, res: Response, next: NextFunction) => {
   let token = req.headers.authorization;
   if (!token) {
     throw new AppError(401, "Token not found");
@@ -12,13 +12,12 @@ export const authClient = (req: Request, res: Response, next: NextFunction) => {
     token as string,
     process.env.JWT_SECRET as string,
     (err: any, decoded: any) => {
-      req.clientId = decoded.sub;
-      // console.log(decoded.sub);
-      if (req.clientId === decoded.sub) {
-        next();
-      } else {
-        throw new AppError(403, "forbbiden");
+      if (err) {
+        throw new AppError(401, err.message);
       }
+      req.clientId = decoded.sub;
+
+      return next();
     }
   );
 };

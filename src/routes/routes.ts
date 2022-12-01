@@ -2,7 +2,6 @@ import { Router } from "express";
 
 const routes = Router();
 
-// importamos os Controllers
 import clientCreateController from "../controllers/cliente/clientCreate.controller";
 import clientDeleteSelfController from "../controllers/cliente/clientDelete.controller";
 import clientListController from "../controllers/cliente/clientList.controller";
@@ -13,25 +12,39 @@ import contactCreateController from "../controllers/contatos/contactCreate.contr
 import listContactController from "../controllers/contatos/listContact.controller";
 import deleteContactController from "../controllers/contatos/deleteContact.controller";
 
-import { authClient } from "../middlewares/authClient";
+import { authToken } from "../middlewares/authToken";
 import updateContactClientController from "../controllers/contatos/updatedContact.controller";
+import authContactClientMiddleware from "../middlewares/authContactClient";
+import authClientMeMiddleware from "../middlewares/authClientMe";
 
 routes.post("/clients", clientCreateController);
 routes.get("/clients", clientListController);
 routes.post("/client/login", clientLoginController);
-routes.delete("/client/:id", authClient, clientDeleteSelfController);
-routes.patch("/client/:id", authClient, clientUpdateController);
+routes.delete(
+  "/client/:id",
+  authToken,
+  authClientMeMiddleware,
+  clientDeleteSelfController
+);
+routes.patch(
+  "/client/:id",
+  authToken,
+  authClientMeMiddleware,
+  clientUpdateController
+);
 
-routes.post("/client/contact", authClient, contactCreateController);
-routes.get("/client/contacts", authClient, listContactController);
+routes.post("/client/contact", authToken, contactCreateController);
+routes.get("/client/contacts", authToken, listContactController);
 routes.delete(
   "/client/delete/contact/:id",
-  authClient,
+  authToken,
+  authContactClientMiddleware,
   deleteContactController
 );
 routes.patch(
   "/client/update/contact/:id",
-  authClient,
+  authToken,
+  authContactClientMiddleware,
   updateContactClientController
 );
 export default routes;
