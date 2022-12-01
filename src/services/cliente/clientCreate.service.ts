@@ -10,20 +10,11 @@ const clientCreateService = async ({
   email,
   tel,
   password,
-}: // contacts /*modifiquei aqui */,
-IClientCreate) => {
+}: IClientCreate) => {
   const clientRepository = AppDataSource.getRepository(Client);
-  // const contactRepository =
-  //   AppDataSource.getRepository(Contact); /*modifiquei aqui */
 
   const clients = await clientRepository.find();
   const emailAlreadyExists = clients.find((user) => user.email === email);
-
-  // const contactExists = await contactRepository.findOneBy({
-  //   email= contacts
-  // }); /*modifiquei aqui */
-
-  // const contact = await contactRepository.find(); /*modifiquei aqui */
 
   if (emailAlreadyExists) {
     throw new AppError(409, "Email already exists");

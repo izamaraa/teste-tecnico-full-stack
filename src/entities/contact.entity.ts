@@ -6,7 +6,7 @@ import { Client } from "./client.entity";
 export class Contact {
   @PrimaryColumn("uuid")
   readonly id: string;
-  @Column()
+  @Column({ nullable: false })
   name: string;
 
   @Column()
@@ -15,7 +15,9 @@ export class Contact {
   @Column()
   tel: number;
 
-  @ManyToOne(() => Client, (client) => client.contacts)
+  @ManyToOne(() => Client, (client) => client.contacts, {
+    /* se der problema mudei aqui */ onDelete: "CASCADE",
+  })
   client: Client;
 
   constructor() {

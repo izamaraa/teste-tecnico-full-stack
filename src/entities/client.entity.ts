@@ -4,6 +4,7 @@ import {
   PrimaryColumn,
   CreateDateColumn,
   OneToMany,
+  UpdateDateColumn,
 } from "typeorm";
 
 import { v4 as uuid } from "uuid";
@@ -14,11 +15,10 @@ export class Client {
   @PrimaryColumn("uuid")
   readonly id: string;
 
-  @Column()
+  @Column({ length: 128 })
   name: string;
 
-  @Column()
-  email: string;
+  @Column({ unique: true }) /*se der bo é aqui*/ email: string;
 
   @Column()
   tel: number;
@@ -28,6 +28,9 @@ export class Client {
 
   @CreateDateColumn()
   dateCreated: Date;
+
+  @UpdateDateColumn()
+  update_at: Date;
 
   @OneToMany(() => Contact, (contact) => contact.client, {
     eager: true,

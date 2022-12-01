@@ -5,7 +5,8 @@ import listContactService from "../../services/contato/listContact.service";
 
 const listContactController = async (req: Request, res: Response) => {
   try {
-    const contact: Icontact[] = await listContactService();
+    const contact: Icontact[] = await listContactService(req.clientId);
+    console.log(contact);
     return res.status(200).json(contact);
   } catch (error) {
     if (error instanceof AppError) {
