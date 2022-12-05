@@ -21,7 +21,7 @@ export class Client {
   @Column({ unique: true }) /*se der bo é aqui*/ email: string;
 
   @Column()
-  tel: number;
+  tel: string;
 
   @Column()
   password: string;

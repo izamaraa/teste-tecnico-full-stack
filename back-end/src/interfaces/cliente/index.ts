@@ -2,7 +2,7 @@ export interface IClient {
   id: string;
   name: string;
   email: string;
-  tel: number;
+  tel: string;
   password: string;
   dateCreated: Date;
   contacts: string /*modifiquei aqui*/;
@@ -10,7 +10,7 @@ export interface IClient {
 export interface IClientCreate {
   name: string;
   email: string;
-  tel: number;
+  tel: string;
   password: string;
   // contacts?: string /*modifiquei aqui*/;
 }

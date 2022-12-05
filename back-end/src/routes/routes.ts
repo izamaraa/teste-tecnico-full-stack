@@ -17,7 +17,7 @@ import updateContactClientController from "../controllers/contatos/updatedContac
 import authContactClientMiddleware from "../middlewares/authContactClient";
 import authClientMeMiddleware from "../middlewares/authClientMe";
 
-routes.post("/clients", clientCreateController);
+routes.post("/client", clientCreateController);
 routes.get("/clients", clientListController);
 routes.post("/client/login", clientLoginController);
 routes.delete(

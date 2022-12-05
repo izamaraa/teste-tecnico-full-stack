@@ -8,7 +8,7 @@ const clientUpdateService = async (
   name?: string,
   email?: string,
   password?: string,
-  tel?: number
+  tel?: string
 ) => {
   const clientRepository = AppDataSource.getRepository(Client);
 
