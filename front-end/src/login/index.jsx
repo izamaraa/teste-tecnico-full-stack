@@ -4,8 +4,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 import api from "../services/api";
+import { Imagephone } from "./styled";
 
-export default function Login({ autenticado, setAutenticado, setUser }) {
+export default function Login({ autenticado, setAutenticado /*, setUser*/ }) {
   const history = useHistory();
 
   const validacoesYup = yup.object().shape({
@@ -33,47 +34,50 @@ export default function Login({ autenticado, setAutenticado, setUser }) {
       .then((response) => {
         console.log(response.data);
         window.localStorage.clear();
-        const { token, user } = response.data;
-        setUser(response.data.user);
-        window.localStorage.setItem("dadosUser", JSON.stringify(user));
+        const { token } = response.data;
+        console.log(response);
         window.localStorage.setItem("token", JSON.stringify(token));
         setAutenticado(true);
         toast.success("Login,efetuado com sucesso!");
-        return history.push(`/schedules`);
+        return history.push(`/schedule`);
       })
       .catch((error) => {
         toast.error("Email ou senha inválidos, tente novamente!");
       });
   }
   if (autenticado) {
-    return <Redirect to={`/schedules`} />;
+    return <Redirect to={`/schedule`} />;
   }
 
   return (
-    <div>
-      <button onClick={() => history.push("/registration")}>
-        Ainda não possuo uma conta
-      </button>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <div>
-            <label>Informe Seu Email *</label>
-            <input name="email" {...register("email")}></input>
-            <>
-              <span>{errors.email?.message}</span>
-            </>
-          </div>
-          <div>
-            <label>Informe Seu Password *</label>
-            <input name="password" {...register("password")}></input>
-            <>
-              <span>{errors.password?.message}</span>
-            </>
-          </div>
-
-          <button type="submit">Entrar</button>
+    <>
+      <Imagephone>
+        <div className="div">
+          <button onClick={() => history.push("/registration")}>
+            Ainda não possuo uma conta
+          </button>
         </div>
-      </form>
-    </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <div>
+              <label>Informe Seu Email *</label>
+              <input name="email" {...register("email")}></input>
+              <>
+                <span>{errors.email?.message}</span>
+              </>
+            </div>
+            <div>
+              <label>Informe Seu Password *</label>
+              <input name="password" {...register("password")}></input>
+              <>
+                <span>{errors.password?.message}</span>
+              </>
+            </div>
+
+            <button type="submit">Entrar</button>
+          </div>
+        </form>
+      </Imagephone>
+    </>
   );
 }

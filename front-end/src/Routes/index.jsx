@@ -18,21 +18,25 @@ export default function Routes() {
   }, [autenticado]);
   return (
     <Switch>
-      <Route exact path="/home">
+      <Route exact path="/">
         <Home />
       </Route>
-      <Route exact path="/registration">
+      <Route path="/registration">
         <Registration autenticado={autenticado} />
       </Route>
-      <Route exact path="/login">
+      <Route path="/login">
         <Login
           autenticado={autenticado}
           setAutenticado={setAutenticado}
-          setUser={setUser}
+          // setUser={setUser}
         />
       </Route>
-      <Route exact path="/schedule">
-        <Schedule />
+      <Route path="/schedule">
+        <Schedule
+          autenticado={autenticado}
+          setAutenticado={setAutenticado}
+          user={user}
+        />
       </Route>
     </Switch>
   );

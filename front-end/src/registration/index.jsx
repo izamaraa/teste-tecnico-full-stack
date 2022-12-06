@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useHistory, Redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../services/api";
+import { ImageBackground } from "./styled";
 
 export default function Registration({ autenticado }) {
   const history = useHistory();
@@ -46,40 +47,46 @@ export default function Registration({ autenticado }) {
     return <Redirect to={`/schedules`} />;
   }
   return (
-    <div>
-      <button onClick={() => history.push("/login")}>Já tenho uma conta</button>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Informe Seu nome *</label>
-          <input name="name" {...register("name")}></input>
-          <>
-            <span>{errors.name?.message}</span>
-          </>
+    <>
+      <ImageBackground>
+        <div className="div">
+          <button onClick={() => history.push("/login")}>
+            Já tenho uma conta
+          </button>
         </div>
-        <div>
-          <label>Informe Seu Email *</label>
-          <input name="email" {...register("email")}></input>
-          <>
-            <span>{errors.email?.message}</span>
-          </>
-        </div>
-        <div>
-          <label>Informe Seu Password *</label>
-          <input name="password" {...register("password")}></input>
-          <>
-            <span>{errors.password?.message}</span>
-          </>
-        </div>
-        <div>
-          <label>Informe Seu Telefone *</label>
-          <input name="tel" {...register("tel")}></input>
-          <>
-            <span>{errors.tel?.message}</span>
-          </>
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <label>Informe Seu nome *</label>
+            <input name="name" {...register("name")}></input>
+            <>
+              <span>{errors.name?.message}</span>
+            </>
+          </div>
+          <div>
+            <label>Informe Seu Email *</label>
+            <input name="email" {...register("email")}></input>
+            <>
+              <span>{errors.email?.message}</span>
+            </>
+          </div>
+          <div>
+            <label>Informe Seu Password *</label>
+            <input name="password" {...register("password")}></input>
+            <>
+              <span>{errors.password?.message}</span>
+            </>
+          </div>
+          <div>
+            <label>Informe Seu Telefone *</label>
+            <input name="tel" {...register("tel")}></input>
+            <>
+              <span>{errors.tel?.message}</span>
+            </>
+          </div>
 
-        <button type="submit">Cadastrar</button>
-      </form>
-    </div>
+          <button type="submit">Cadastrar</button>
+        </form>
+      </ImageBackground>
+    </>
   );
 }
