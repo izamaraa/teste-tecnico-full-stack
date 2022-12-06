@@ -9,11 +9,11 @@ export class Contact {
   @Column({ nullable: false })
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
-  tel: number;
+  tel: string;
 
   @ManyToOne(() => Client, (client) => client.contacts, {
     /* se der problema mudei aqui */ onDelete: "CASCADE",

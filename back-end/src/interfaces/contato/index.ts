@@ -2,12 +2,12 @@ export interface Icontact {
   id: string;
   name: string;
   email: string;
-  tel: number;
+  tel: string;
 }
 
 export interface IcontactClient {
   clientId: string;
   name: string;
   email: string;
-  tel: number;
+  tel: string;
 }
