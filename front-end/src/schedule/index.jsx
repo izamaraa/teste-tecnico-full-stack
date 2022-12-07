@@ -4,22 +4,26 @@ import api from "../services/api";
 import { ImageSchedule } from "./styled";
 import ModalContact from "../modalContacts";
 import ModalEditContact from "../modalEditContacts";
-import { ObjectSchema } from "yup";
-
+import ModalEditUser from "../modalUser";
 export default function Schedule({ autenticado, setAutenticado }) {
   const history = useHistory();
 
   const [modalOn, setModalOn] = useState(false);
   const [contacts, setContacts] = useState([]);
 
+  //edit do contact
   const [modalUpadate, setModalUpdate] = useState(false);
   const [contactUpdate, setContactUpdate] = useState({});
+
+  // edit do usuario
+  const [modalUpdateUser, setModalUpdateUser] = useState(false);
+  // const [UserUpdate, setUserUpdate] = useState({});
 
   const token = JSON.parse(localStorage.getItem("token"));
 
   useEffect(() => {
     carregaContacts();
-  }, [,]);
+  }, []);
   function exit() {
     localStorage.clear();
     setAutenticado(false);
@@ -53,7 +57,6 @@ export default function Schedule({ autenticado, setAutenticado }) {
       .catch((err) => console.log(err));
   }
   function deletarContact(contacts) {
-    // console.log(contacts);
     api
       .delete(`/client/delete/contact/${contacts.id}`, {
         headers: {
@@ -65,8 +68,8 @@ export default function Schedule({ autenticado, setAutenticado }) {
   }
 
   function editarContact(data) {
-    console.log(contactUpdate);
-    console.log(data);
+    // console.log(contactUpdate);
+    // console.log(data);
     Object.entries(data).forEach(([chave, valor]) => {
       if (valor === "") {
         delete data[chave];
@@ -84,6 +87,64 @@ export default function Schedule({ autenticado, setAutenticado }) {
       .catch((err) => console.log(err));
   }
 
+  function getAccount() {
+    api
+      .get(`/client/me`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        localStorage.setItem("id", res.data.client.id);
+        localStorage.setItem("name", res.data.client.name);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  useEffect(() => {
+    getAccount();
+  }, []);
+
+  function deleteAccount() {
+    api
+      .delete(`/client/${localStorage.getItem("id")}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        localStorage.clear();
+        setAutenticado(false);
+        history.push("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function editAccount(data) {
+    console.log(data);
+    Object.entries(data).forEach(([chave, valor]) => {
+      if (valor === "") {
+        delete data[chave];
+      }
+    });
+    console.log(data);
+    api
+      .patch(`/client/${localStorage.getItem("id")}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log("deu");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <>
       <ImageSchedule>
@@ -92,6 +153,16 @@ export default function Schedule({ autenticado, setAutenticado }) {
           <button onClick={() => setModalOn(true)}>Adicionar</button>
           {modalOn ? (
             <ModalContact setModalOn={setModalOn} funcaoModal={criaContacts} />
+          ) : (
+            ""
+          )}
+          <button onClick={() => deleteAccount()}>Deletar conta</button>
+          <button onClick={() => setModalUpdateUser(true)}>Editar conta</button>
+          {modalUpdateUser ? (
+            <ModalEditUser
+              setModalUpdateUser={setModalUpdateUser}
+              funcaoModalEditUser={editAccount}
+            />
           ) : (
             ""
           )}

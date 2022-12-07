@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import api from "../services/api";
 import { Imagephone } from "./styled";
 
-export default function Login({ autenticado, setAutenticado /*, setUser*/ }) {
+export default function Login({ autenticado, setAutenticado }) {
   const history = useHistory();
 
   const validacoesYup = yup.object().shape({

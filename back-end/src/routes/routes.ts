@@ -16,9 +16,11 @@ import { authToken } from "../middlewares/authToken";
 import updateContactClientController from "../controllers/contatos/updatedContact.controller";
 import authContactClientMiddleware from "../middlewares/authContactClient";
 import authClientMeMiddleware from "../middlewares/authClientMe";
+import clientListIdController from "../controllers/cliente/clientListid.controller";
 
 routes.post("/client", clientCreateController);
 routes.get("/clients", clientListController);
+routes.get("/client/me", authToken, clientListIdController);
 routes.post("/client/login", clientLoginController);
 routes.delete(
   "/client/:id",
@@ -35,6 +37,7 @@ routes.patch(
 
 routes.post("/client/contact", authToken, contactCreateController);
 routes.get("/client/contacts", authToken, listContactController);
+
 routes.delete(
   "/client/delete/contact/:id",
   authToken,
