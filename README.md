@@ -9,27 +9,25 @@ Em seu terminal digite o seguinte comando abaixo para clonar o repositório :
 Após o clone, e com projeto já sendo executado em sua máquina utilize os
 seguintes comandos:
 
-    pip install -r requirements.txt
-
-    python manage.py makemigrations
-
-    python manage.py migrate
+git init
 
 ou:
 
-pip install -r requirements.txt
+$ yarn init -y
 
-    ./manage.py makemigrations
+Vamos precisar adicionar algumas dependências tais como:
 
-    ./manage.py migrate
+yarn add typescript @types/node -D
+
+Assim que possuírmos essas dependencias necessarias no projeto atual, vamos precisar iniciá-lo com o comando:
+
+yarn tsc --init
+
+O resultado do comando é a criação do arquivo tsconfig.json, contem todas as configurações do typescript.
 
 Em seguida rodar o servidor :
 
-    python manage.py runserver
-
-ou :
-
-    ./manage.py runserver
+yarn dev
 
 1. Rotas Client ...
 
