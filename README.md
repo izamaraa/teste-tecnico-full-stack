@@ -17,6 +17,8 @@ Atenção: é necessário utilizar o yarn pois esse projeto foi iniciado com ess
 
 Assim que inicializar o projeto com as dependencias necessarias configure as variavies de ambiente, reescreva o arquivo .env.example
 
+OBS: Esse projeto esta vinculado e configurado ao banco de dados Postgress, caso queira alterar entre no arquivo data-source.ts dentro da pasta de services e preencha os dados necessarios para a utilizacao do banco de dados de sua preferencia.
+
 Assim que possuírmos essas dependencias necessarias no projeto atual, vamos precisar executar as migrations com o comando:
 
     ** yarn typeorm migration:run -d src/data-source.ts **
