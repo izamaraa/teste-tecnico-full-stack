@@ -6,28 +6,25 @@ Em seu terminal digite o seguinte comando abaixo para clonar o repositório :
 
     ** git clone git@github.com:izamaraa/teste-tecnico-full-stack.git **
 
-Após o clone, e com projeto já sendo executado em sua máquina utilize os
-seguintes comandos:
+Para inciar este projeto, é necessário instalar as dependências, que serão utilizadas nos testes. Portanto utilize o comando abaixo para instalar tais dependências:
 
-git init
+   ** yarn **
 
-ou:
+Atenção: é necessário utilizar o yarn pois esse projeto foi iniciado com esse gerenciador de pacotes.
 
-$ yarn init -y
+Assim que inicializar o projeto com as dependencias necessarias configure as variavies de ambiente, reescreva o arquivo .env.example
 
-Vamos precisar adicionar algumas dependências tais como:
+Assim que possuírmos essas dependencias necessarias no projeto atual, vamos precisar executar as migrations com o comando:
 
-yarn add typescript @types/node -D
+   ** yarn typeorm migration:run -d src/data-source.ts **
 
-Assim que possuírmos essas dependencias necessarias no projeto atual, vamos precisar iniciá-lo com o comando:
-
-yarn tsc --init
-
-O resultado do comando é a criação do arquivo tsconfig.json, contem todas as configurações do typescript.
+O resultado do comando é a criação das migrations necessarias para o banco de dados.
 
 Em seguida rodar o servidor :
 
-yarn dev
+   ** yarn dev **
+
+
 
 1. Rotas Client ...
 
