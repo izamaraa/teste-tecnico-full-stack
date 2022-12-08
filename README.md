@@ -1,6 +1,9 @@
-## projeto-full-stack
+## Projeto-full-stack
+1.Resumo
 
-1. Instalando...
+Este teste consiste em criar um pequeno cadastro de clientes com vínculo de contatos, depois mostrar o cliente e seus contatos vinculados, utilizando Javascript e Typescript.
+
+2. Instalando...
 
 Em seu terminal digite o seguinte comando abaixo para clonar o repositório :
 
@@ -26,7 +29,7 @@ Em seguida rodar o servidor :
 
 
 
-1. Rotas Client ...
+3. Rotas Client ...
 
 -Criar uma conta :
 http://localhost:5001/client
@@ -49,7 +52,7 @@ http://localhost:5001/client/{id cliente}
 
 - Bearer token
 
-2- Rotas contacts ...
+4- Rotas contacts ...
 
 -Criar uma contato :
 http://localhost:5001/client/contact
@@ -69,7 +72,7 @@ http://localhost:5001/client/update/contact/{id contact}
 
 - Bearer token client
 
-3- Corpo das Requisições
+5- Corpo das Requisições
 
 # API da aplicação de um cadastro de clientes.
 
