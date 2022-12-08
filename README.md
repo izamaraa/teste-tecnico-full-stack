@@ -8,7 +8,7 @@ Em seu terminal digite o seguinte comando abaixo para clonar o repositório :
 
 Para inciar este projeto, é necessário instalar as dependências, que serão utilizadas nos testes. Portanto utilize o comando abaixo para instalar tais dependências:
 
-   ** yarn **
+    ** yarn **
 
 Atenção: é necessário utilizar o yarn pois esse projeto foi iniciado com esse gerenciador de pacotes.
 
@@ -16,13 +16,13 @@ Assim que inicializar o projeto com as dependencias necessarias configure as var
 
 Assim que possuírmos essas dependencias necessarias no projeto atual, vamos precisar executar as migrations com o comando:
 
-   ** yarn typeorm migration:run -d src/data-source.ts **
+    ** yarn typeorm migration:run -d src/data-source.ts **
 
 O resultado do comando é a criação das migrations necessarias para o banco de dados.
 
 Em seguida rodar o servidor :
 
-   ** yarn dev **
+    ** yarn dev **
 
 
 
