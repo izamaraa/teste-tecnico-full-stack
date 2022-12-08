@@ -5,6 +5,7 @@ import { ImageSchedule } from "./styled";
 import ModalContact from "../modalContacts";
 import ModalEditContact from "../modalEditContacts";
 import ModalEditUser from "../modalUser";
+import { toast } from "react-toastify";
 export default function Schedule({ autenticado, setAutenticado }) {
   const history = useHistory();
 
@@ -17,8 +18,6 @@ export default function Schedule({ autenticado, setAutenticado }) {
 
   // edit do usuario
   const [modalUpdateUser, setModalUpdateUser] = useState(false);
-  // const [UserUpdate, setUserUpdate] = useState({});
-
   const token = JSON.parse(localStorage.getItem("token"));
 
   useEffect(() => {
@@ -130,15 +129,15 @@ export default function Schedule({ autenticado, setAutenticado }) {
         delete data[chave];
       }
     });
-    console.log(data);
     api
-      .patch(`/client/${localStorage.getItem("id")}`, {
+      .patch(`/client/${localStorage.getItem("id")}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
-        console.log("deu");
+        toast.success("Usuario editado com sucesso!");
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -149,7 +148,8 @@ export default function Schedule({ autenticado, setAutenticado }) {
     <>
       <ImageSchedule>
         <div className="cabeçalho">
-          <h2 color="white">Seus contatos</h2>
+          <h1>Olá, {localStorage.getItem("name")}</h1>
+
           <button onClick={() => setModalOn(true)}>Adicionar</button>
           {modalOn ? (
             <ModalContact setModalOn={setModalOn} funcaoModal={criaContacts} />
@@ -168,7 +168,9 @@ export default function Schedule({ autenticado, setAutenticado }) {
           )}
           <button onClick={exit}>sair</button>
         </div>
-
+        <>
+          <h3 color="white">Seus contatos</h3>
+        </>
         <div className="contatos">
           <ol>
             {contacts?.map((item, index) => (

@@ -21,7 +21,7 @@ export default function ModalEditContact({ setModalUpdate, funcaoModalEdit }) {
       <Modal onSubmit={handleSubmit(funcaoModalEdit)}>
         <p>
           Editar Contato
-          <button onClick={() => setModalUpdate(false)}>Cancelar</button>
+          <button onClick={() => setModalUpdate(false)}>x</button>
         </p>
         <label>Nome</label>
         <input name="name" {...register("name")}></input>
@@ -31,7 +31,7 @@ export default function ModalEditContact({ setModalUpdate, funcaoModalEdit }) {
         <span>{errors.email?.message}</span>
         <label>Telefone</label>
         <input name="tel" {...register("tel")}></input>
-        <button type="submit">Confirmar</button>
+        <button type="submit">+</button>
       </Modal>
     </DivModal>
   );

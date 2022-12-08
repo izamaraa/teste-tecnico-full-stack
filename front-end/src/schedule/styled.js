@@ -27,8 +27,8 @@ export const ImageSchedule = styled.div`
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
-    overflow: scroll;
-    height: 80vh;
+    overflow: auto;
+    height: 60vh;
     gap: 1rem;
   }
   li {
