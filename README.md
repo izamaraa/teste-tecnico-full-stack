@@ -1,4 +1,4 @@
-## testebackend
+## back-end
 
 1. Instalando...
 
@@ -76,4 +76,19 @@ http://localhost:5001/client/update/contact/{id contact}
 
 3- Corpo das Requisições
 
-entrada:
+# API da aplicação de um cadastro de clientes.
+
+## Métodos 🛠️
+
+| Método   | Endpoint                     | Descrição                                            | Autorização Token |
+| -------- | ---------------------------- | ---------------------------------------------------- | ----------------- |
+| `GET`    | `/clients`                   | `lista todos os clientes cadastrados`                | `Não`             |
+| `POST`   | `/client`                    | `criação de um novo cliente`                         | `Não`             |
+| `POST`   | `client/login`               | `login do cliente`                                   | `Não`             |
+| `GET`    | `/client/me`                 | `lista apenas um cliente relacionado pelo id`        | `Sim`             |
+| `PATCH`  | `/client/:id`                | `atualiza o cliente relacionado pelo id`             | `Sim`             |
+| `DELETE` | `/client/:id`                | `deleta o cliente relacionado pelo id`               | `Sim`             |
+| `POST`   | `/client/contact`            | `cria um contato para o cliente relacionado pelo id` | `Sim`             |
+| `GET`    | `/client/contacts`           | `lista os contatos do cliente relacionado pelo id`   | `Sim`             |
+| `PATCH`  | `/client/update/contact/:id` | `edita os contatos do cliente relacionado pelo id`   | `Sim`             |
+| `DELETE` | `/client/delete/contact/:id` | `exclui os contatos do cliente relacionado pelo id`  | `Sim`             |
