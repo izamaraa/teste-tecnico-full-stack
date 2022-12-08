@@ -1,4 +1,4 @@
-## back-end
+## projeto-full-stack
 
 1. Instalando...
 
